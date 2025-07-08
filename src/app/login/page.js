@@ -1,43 +1,52 @@
 "use client";
 import { useState } from "react";
-import "../signup/signup.css"; // shared CSS
+import "../signup/signup.css"; // using same CSS
 
 export default function LoginPage() {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!email || !email.includes("@") || password.length < 1) {
-      setError("Email and password are required.");
+    if (!email.includes("@") || password.length < 1) {
+      setError("Valid email and password are required.");
     } else {
       setError("");
-      alert("Logged in with: " + email);
+      alert("Logged in as: " + email);
     }
   };
 
   return (
     <div className="page-wrapper">
       <div className="topbar">
-        <span className="logo-symbol">🔷</span>
-        <span className="logo-name">SeekInvest</span>
+        <title>Login - SeekInvest</title>
+      
+      <img
+  src="https://app.seekinvest.com/images/coloredLogoIcon.svg"
+  alt="SeekInvest Logo"
+  className="logo-image"
+/>
+
       </div>
 
       <div className="signup-content">
-        {/* Splash crown on top of W */}
-        <div className="heading-crowned">
+        {/* Title with splash crown */}
+        <div className="heading-crowned-exact">
           <img
             src="/images/splashLeftIcon.svg"
             alt="Splash Crown"
-            className="splash-crown"
+            className="splash-crown-exact"
           />
-          <h1 className="title">Welcome Back To SeekInvest</h1>
+          <h1 className="title">Welcome Back to SeekInvest</h1>
         </div>
 
         <p className="subtitle">
-          The platform for growth and engagement, designed for forward-thinking
-          enterprises and financial advisors.
+          The platform for growth and engagement, designed for forward-thinking enterprises and financial advisors.
         </p>
 
         <form onSubmit={handleSubmit} className="form">
@@ -53,15 +62,24 @@ export default function LoginPage() {
           />
 
           <label htmlFor="password" className="input-label">Password</label>
-          <input
-            id="password"
-            type="password"
-            placeholder="Enter your password"
-            className={`input ${error ? "input-error" : ""}`}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div className="password-wrapper">
+            <input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter your password"
+              className="input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button
+              type="button"
+              className="toggle-password"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "🚫" : "👁️"}
+            </button>
+          </div>
 
           <div className="forgot-password">
             <a href="/forgot-password">Forgot password?</a>
@@ -84,4 +102,4 @@ export default function LoginPage() {
       </div>
     </div>
   );
-}
+};
