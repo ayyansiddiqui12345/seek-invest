@@ -1,6 +1,5 @@
-"use client";
-import LoginPage from "./login/page";
+// "use client";
 
-export default function Home() {
-  return <LoginPage />;
-}
+// export default function Home() {
+//   return <></>;
+// }
